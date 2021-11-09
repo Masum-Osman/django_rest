@@ -20,12 +20,12 @@ class Employees(models.Model):
 class Menu(models.Model):
     menuId = models.AutoField(primary_key=True)
     restaurantId = models.IntegerField(11)
-    title = models.CharField(200)
-    type = models.CharField(200)
-    summery = models.CharField(200)
-    price = models.IntegerField(11)
+    title = models.CharField(max_length=200)
+    type = models.CharField(max_length=200)
+    summery = models.CharField(max_length=200)
+    price = models.FloatField(11)
     createdOn = models.DateField()
-    
+
 
 class Vote(models.Model):
     voteId = models.AutoField(primary_key=True)
