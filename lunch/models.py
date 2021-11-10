@@ -17,7 +17,7 @@ class Employees(models.Model):
     dateOfJoining = models.DateField()
 
 
-class Menu(models.Model):
+class Menus(models.Model):
     menuId = models.AutoField(primary_key=True)
     restaurantId = models.IntegerField(11)
     title = models.CharField(max_length=200)
@@ -27,7 +27,7 @@ class Menu(models.Model):
     createdOn = models.DateField()
 
 
-class Vote(models.Model):
+class Votes(models.Model):
     voteId = models.AutoField(primary_key=True)
     employeeId = models.IntegerField(11)
     menuId = models.IntegerField(11)
