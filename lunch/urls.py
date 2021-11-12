@@ -8,7 +8,7 @@ urlpatterns=[
 
     url(r'^restaurant/menu$',views.menuApi),
     url(r'^restaurant/menu/([0-9]+)$',views.menuApi),
-
+    
     url(r'^restaurant/menu/vote$',views.voteApi),
     url(r'^restaurant/menu/vote/([0-9]+)$',views.voteApi),
 

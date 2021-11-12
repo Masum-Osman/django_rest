@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -5,12 +6,14 @@ from django.http.response import JsonResponse
 
 from lunch.models import Restaurants, Employees, Menus, Votes
 from lunch.serializers import RestaurantSerializer, EmployeesSerializer, MenuSerializer, VoteSerializer
+from _datetime import date
 
 # Create your views here.
 
 @csrf_exempt
 def restaurantApi(request, id=0):
     if request.method == 'GET':
+        logging.info()
         restaurant = Restaurants.objects.all()
         restaurant_serializer = RestaurantSerializer(restaurant, many=True)
         return JsonResponse(restaurant_serializer.data, safe=False)
@@ -33,7 +36,7 @@ def restaurantApi(request, id=0):
 @csrf_exempt
 def menuApi(request, id=0):
     if request.method == 'GET':
-        menus = Menus.objects.all()
+        menus = Menus.objects.filter(createdOn=date.today())
         menu_serializer = MenuSerializer(menus, many=True)
         return JsonResponse(menu_serializer.data, safe=False)
     elif request.method == 'POST':
