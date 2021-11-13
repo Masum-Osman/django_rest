@@ -66,10 +66,17 @@ def employeeApi(request, id=0):
 @csrf_exempt
 def voteApi(request, id=0):
     if request.method == 'GET':
-        vote = Votes.objects.all()
+        vote = Votes.objects.filter(votedOn=date.today())
         vote_serializer = VoteSerializer(vote, many=True)
         return JsonResponse(vote_serializer.data, safe=False)
     elif request.method == 'POST':
+        vote_data = JSONParser().parse(request)
+        vote_serializer = VoteSerializer(data=vote_data)
+        if vote_serializer.is_valid():
+            vote_serializer.save()
+            return JsonResponse("vote added successfully", safe=False)
+        return JsonResponse("vote added failed", safe=False)
+    elif request.method == 'PUT':
         vote_data = JSONParser().parse(request)
         vote_serializer = VoteSerializer(data=vote_data)
         if vote_serializer.is_valid():
